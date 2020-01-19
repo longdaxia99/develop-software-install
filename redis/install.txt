@@ -1,0 +1,40 @@
+1，依赖包检查
+　1 yum install cpp -y  
+
+　2 yum install binutils -y
+
+　3 yum install glibc-kernheaders -y
+
+　4 yum install glibc-common -y
+
+　5 yum install glibc-devel -y
+
+　6 yum install gcc -y
+
+　7 yum install make -y
+
+2、下载Redis源码，解压缩后编译源码。
+$ cd /usr/local
+$ mkdir soft
+$ cd soft
+$ wget http://download.redis.io/releases/redis-4.0.6.tar.gz
+$ tar xzf redis-4.0.6.tar.gz
+$ cd redis-4.0.6
+$ make
+
+mkdir /usr/local/redis
+cp redis-server /usr/local/redis 
+cp redis-benchmark /usr/local/redis 
+cp redis-check-rdb /usr/local/redis
+cp redis-sentinel /usr/local/redis
+cp redis-cli /usr/local/redis 
+cp redis.conf /usr/local/redis 
+
+3.配置文件说明
+  1,在redis.conf第89行，将protected-mode no
+  2,在redis.conf第71行修改下bind 192.168.42.111  (ip为你linux的ip);
+  3,在redis.conf第502行，加上 requirepass "12345678"， 登录密码
+
+测试：
+1，启动redis:  ./redis-server redis.conf &
+2, 连接redis:  ./redis-cli -h 192.168.42.111 -p 6379 -a 12345678
